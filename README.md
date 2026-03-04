@@ -1,54 +1,100 @@
-# Haiku Daemon Project
+# Haiku Daemon System (C)
 
-## Description
+## Overview
 
-The Haiku Daemon Project is a set of programs that simulate the creation of "Artificial Haiku" poems based on a word dictionary. The project consists of:
+This project demonstrates a simple **daemon-based system written in C** designed to generate haiku poems using a dictionary of words.
 
-1. **Haiku Masters**: A daemon program that sends words from a dictionary to students via network sockets.
-2. **Haiku Students**: Clients that collect words and form them into Haikus (5-7-5 word structure).
-3. **Librarian**: A program that collects completed Haikus and logs them into a file.
+The system simulates a background service architecture composed of multiple cooperating components. It explores concepts related to **system programming, modular design, and process-oriented workflows**.
+
+The project is intended to demonstrate how different modules can interact within a structured system while being compiled and managed through a **Makefile build process**.
+
+---
+
+## System Architecture
+
+The project is organized into three main modules:
+
+### Master Daemon
+
+The master component acts as the central controller of the system.
+It manages the generation process and coordinates the interaction between other components.
+
+### Student Module
+
+This module generates haiku lines using words from the dictionary file.
+It represents the logic responsible for creating the poem structure.
+
+### Librarian Module
+
+The librarian component manages the storage and retrieval of generated haiku data.
+
+Together, these modules simulate a **daemon-like service workflow** where different parts of the system perform specialized tasks.
+
+---
+
+## Project Structure
+
+```
+Makefile
+README.md
+
+librarian/
+    librarian.c
+    librarian.h
+
+master/
+    dictionary.txt
+    haiku_master.c
+    haiku_master.h
+
+student/
+    haiku_student.c
+    haiku_student.h
+```
+
+### Key Files
+
+* **Makefile** – builds the project and compiles all modules.
+* **dictionary.txt** – word list used for generating haiku lines.
+* **librarian module** – handles storage and management of generated haiku.
+* **master module** – coordinates the system and runs the main daemon logic.
+* **student module** – generates haiku structures using dictionary data.
+
+---
 
 ## Features
 
-- Multiple Haiku Masters can run simultaneously.
-- Students organize words into Haikus and print them when completed.
-- The Librarian collects and logs Haikus from Students.
+* Modular system design in C
+* Multiple cooperating components
+* Haiku generation using dictionary-based word selection
+* Organized project structure with separate modules
+* Build automation using **Makefile**
 
-## Requirements
+---
 
-- GCC (GNU Compiler Collection) to compile the code.
-- A Unix-like operating system (Linux/macOS) or Windows with a Unix shell (like Git Bash).
+## Technologies Used
 
-## Installation
+* C programming language
+* Makefile build system
+* Modular system architecture
+* File-based word dictionary
 
-1. Clone the repository (or download the project files).
-2. Navigate to the project directory.
-3. Run `make` to compile the project.
+---
 
-## Usage
+## How to Build and Run
 
-1. To start a Haiku Master:  
-   `./master/haiku_master <port> <dictionary_file> <cooldown>`
+1. Open a terminal in the project directory.
+2. Compile the project using:
 
-2. To start a Haiku Student:  
-   `./student/haiku_student <master_IP> <master_port> [more_ports]`
+```
+make
+```
 
+3. Run the generated executable according to the Makefile configuration.
 
-3. To start the Librarian:  
-   `./librarian/librarian`
+---
 
-4. To stop: 
-` Ctrl + C  `
+## Purpose
 
-5. To open student.log:
-` cat student.log ` 
-
-## Example
-
-### Start a Haiku Master:
-
-```bash
-./master/haiku_master 9012 ./master/dictionary.txt 2
-./student/haiku_student 46.10.253.12 9012
-./librarian/librarian
+This project explores basic **systems programming concepts**, including modular program structure, build automation, and background-service style application design.
 
